@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+<EditText
+    android:id="@+id/etphone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_centerVertical="true"
+    android:layout_marginLeft="50dp"
+    android:ems="10"
+    android:hint="Phone (Optional)"
+    android:inputType="phone" />
+
+<EditText
+    android:id="@+id/etemail"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/etphone"
+    android:layout_alignLeft="@+id/etphone"
+    android:layout_marginBottom="25dp"
+    android:ems="10"
+    android:hint="Email (Required)"
+    android:inputType="textEmailAddress" />
+
+<EditText
+    android:id="@+id/etname"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/etemail"
+    android:layout_alignLeft="@+id/etemail"
+    android:layout_marginBottom="16dp"
+    android:ems="10"
+    android:hint="Name (Required)"
+    android:inputType="textPersonName" />
+
+<EditText
+    android:id="@+id/etcity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/etphone"
+    android:layout_below="@+id/etphone"
+    android:layout_marginTop="25dp"
+    android:hint="City (Optional)"
+    android:ems="10" />
+
+<Button
+    android:id="@+id/bregister"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/etcity"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="50dp"
+    android:text="Register" />
+
+<TextView
+    android:id="@+id/textView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="28dp"
+    android:text="Registration Form"
+    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>
