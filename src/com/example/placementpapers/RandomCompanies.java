@@ -29,20 +29,21 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class RandomCompanies extends Activity {
+	public String[] imgurl;
+	public String[] orgname;
 	private ProgressDialog pDialog;
 	String name, limit, page;
 	String organisation_id;
 
 	JSONParser jParser = new JSONParser();
 
-	ArrayList<HashMap<String, String>> ResultFetch;
+	//ArrayList<HashMap<String, String>> ResultFetch;
 
 	private static String url = "http://swiftintern.com/organizations/placementpapers.json";
 
 	private static final String TAG_ORGANIZATIONS = "organizations";
 	private static final String TAG_NAME = "_name";
 	private static final String TAG_ID = "_id";
-
 	ListView list;
 
 	@Override
@@ -51,8 +52,7 @@ public class RandomCompanies extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.random_companies);
 		list = (ListView) findViewById(android.R.id.list);
-
-		ResultFetch = new ArrayList<HashMap<String, String>>();
+		//ResultFetch = new ArrayList<HashMap<String, String>>();
 		new LoadResult().execute();
 
 	}
@@ -83,10 +83,8 @@ public class RandomCompanies extends Activity {
 					JSONObject c = organizations.getJSONObject(i);
 					organisation_id = c.getString(TAG_ID);
 					name = c.getString(TAG_NAME);
-					HashMap<String, String> map = new HashMap<String, String>();
-					map.put(TAG_ID, organisation_id);
-					map.put(TAG_NAME, name);
-					ResultFetch.add(map);
+					orgname[i] = name;
+					imgurl[i] = "http://swiftintern.com/organizations/photo/"+organisation_id;
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -106,12 +104,6 @@ public class RandomCompanies extends Activity {
 									R.id.sem, R.id.sub, R.id.sm, R.id.mt,
 									R.id.et, R.id.total, R.id.grade });
 					list.setAdapter(adapter);
-
-					// ArrayAdapter<String> arrayAdapter = new
-					// ArrayAdapter(ReadResult.this,android.R.layout.simple_list_item_1,
-					// ResultFetch);
-					// list.setAdapter(arrayAdapter);
-
 				}
 			});
 
