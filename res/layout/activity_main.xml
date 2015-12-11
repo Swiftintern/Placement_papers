@@ -8,4 +8,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
+    <Button
+        android:id="@+id/bsignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:text="Sign Up" />
+
+    <Button
+        android:id="@+id/bcompanies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bsignup"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="Show Companies" />
+    
 </RelativeLayout>

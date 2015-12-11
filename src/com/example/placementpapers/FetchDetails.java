@@ -115,24 +115,22 @@ public class FetchDetails extends Activity {
 		@Override
 		protected Bitmap doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
-			String urlDisplay = "http://swiftintern.com/organizations/photo/"+organisation_id;
+			String urlDisplay = "http://swiftintern.com/organizations/photo/"
+					+ organisation_id;
 			Bitmap mIcon = null;
-			try{
+			try {
 				InputStream in = new java.net.URL(urlDisplay).openStream();
 				mIcon = BitmapFactory.decodeStream(in);
-			}
-			catch(Exception e)
-			{
-				Log.e("Error:",e.getMessage());
+			} catch (Exception e) {
+				Log.e("Error:", e.getMessage());
 				e.printStackTrace();
 			}
 			return mIcon;
 		}
 
-		protected void onPostExecute(Bitmap result)
-		{
+		protected void onPostExecute(Bitmap result) {
 			bmImage.setImageBitmap(result);
-			
+
 		}
 	}
 

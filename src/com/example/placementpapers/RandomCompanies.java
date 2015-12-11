@@ -18,6 +18,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -31,10 +34,12 @@ import android.widget.Toast;
 public class RandomCompanies extends Activity {
 	public String[] imgurl;
 	public String[] orgname;
+	public String[] orga_id;
 	private ProgressDialog pDialog;
 	String name, limit, page;
 	String organisation_id;
 	LazyAdapter adapter;
+	int orgid;
 	JSONParser jParser = new JSONParser();
 
 	// ArrayList<HashMap<String, String>> ResultFetch;
@@ -55,6 +60,27 @@ public class RandomCompanies extends Activity {
 		// ResultFetch = new ArrayList<HashMap<String, String>>();
 		new LoadResult().execute();
 		adapter = new LazyAdapter(this, imgurl, orgname);
+		list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				String id = (String) arg0.getItemAtPosition(arg2);
+				for (int i = 1; i <= orgname.length; i++) {
+					if (orgname[i] == id) {
+						orgid = i;
+					}
+				}
+				Bundle senddata = new Bundle();
+				senddata.putString("organisation_id", orga_id[orgid]);
+				Intent j = new Intent("android.intent.action.FETCHDETAILS");
+				j.putExtras(senddata);
+				startActivity(j);
+				finish();
+			}
+
+		});
+
 	}
 
 	@Override
@@ -90,6 +116,7 @@ public class RandomCompanies extends Activity {
 					organisation_id = c.getString(TAG_ID);
 					name = c.getString(TAG_NAME);
 					orgname[i] = name;
+					orga_id[i] = organisation_id;
 					imgurl[i] = "http://swiftintern.com/organizations/photo/"
 							+ organisation_id;
 				}
