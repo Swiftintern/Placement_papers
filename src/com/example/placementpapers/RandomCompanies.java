@@ -34,10 +34,10 @@ public class RandomCompanies extends Activity {
 	private ProgressDialog pDialog;
 	String name, limit, page;
 	String organisation_id;
-
+	LazyAdapter adapter;
 	JSONParser jParser = new JSONParser();
 
-	//ArrayList<HashMap<String, String>> ResultFetch;
+	// ArrayList<HashMap<String, String>> ResultFetch;
 
 	private static String url = "http://swiftintern.com/organizations/placementpapers.json";
 
@@ -52,9 +52,15 @@ public class RandomCompanies extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.random_companies);
 		list = (ListView) findViewById(android.R.id.list);
-		//ResultFetch = new ArrayList<HashMap<String, String>>();
+		// ResultFetch = new ArrayList<HashMap<String, String>>();
 		new LoadResult().execute();
+		adapter = new LazyAdapter(this, imgurl, orgname);
+	}
 
+	@Override
+	public void onDestroy() {
+		list.setAdapter(null);
+		super.onDestroy();
 	}
 
 	class LoadResult extends AsyncTask<String, String, String> {
@@ -84,7 +90,8 @@ public class RandomCompanies extends Activity {
 					organisation_id = c.getString(TAG_ID);
 					name = c.getString(TAG_NAME);
 					orgname[i] = name;
-					imgurl[i] = "http://swiftintern.com/organizations/photo/"+organisation_id;
+					imgurl[i] = "http://swiftintern.com/organizations/photo/"
+							+ organisation_id;
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -95,17 +102,6 @@ public class RandomCompanies extends Activity {
 
 		protected void onPostExecute(String file_url) {
 			pDialog.dismiss();
-			runOnUiThread(new Runnable() {
-				public void run() {
-					ListAdapter adapter = new SimpleAdapter(ReadResult.this,
-							ResultFetch, R.layout.list_item, new String[] {
-									TAG_SEMESTER, TAG_COURSE, TAG_SM, TAG_MT,
-									TAG_ET, TAG_TOTAL, TAG_GRADES }, new int[] {
-									R.id.sem, R.id.sub, R.id.sm, R.id.mt,
-									R.id.et, R.id.total, R.id.grade });
-					list.setAdapter(adapter);
-				}
-			});
 
 		}
 
